@@ -1,16 +1,37 @@
+import org.gradle.api.initialization.resolve.RepositoriesMode
+
 pluginManagement {
     repositories {
+        gradlePluginPortal()
         google()
         mavenCentral()
-        gradlePluginPortal()
     }
 }
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    String storageUrl = System.env.FLUTTER_STORAGE_BASE_URL ?: "https://storage.googleapis.com"
     repositories {
         google()
         mavenCentral()
+        maven {
+            url 'app/libs/repo'
+        }
+        maven {
+            url "$storageUrl/download.flutter.io"
+        }
     }
 }
 rootProject.name = "Parent_Android_Native"
 include ':app'
+
+setBinding(new Binding([gradle: this]))
+evaluate(new File(
+        settingsDir,
+        '../Flutter_Module/.android/include_flutter.groovy'
+))
+
+include ':Flutter_Module'
+project(':Flutter_Module').projectDir = new File('../Flutter_Module')
+
+
+
