@@ -1,97 +1,52 @@
 package com.nuhin13.parent_android_native.flutter_communication
 
-import android.app.Activity
 import android.content.Context
+import android.widget.Toast
 import com.google.gson.Gson
+import com.nuhin13.parent_android_native.Util
+import com.nuhin13.parent_android_native.flutter_communication.ChannelConstants.Companion.KEY_FLUTTER_TO_NATIVE_EXIT_FLUTTER
+import com.nuhin13.parent_android_native.flutter_communication.ChannelConstants.Companion.KEY_FLUTTER_TO_NATIVE_OBJECT_PASS
+import com.nuhin13.parent_android_native.flutter_communication.ChannelConstants.Companion.KEY_FLUTTER_TO_NATIVE_SPECIFIC_ROUTE
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
-import java.util.ArrayList
 
-class MainMethodChannel(val context: Context): MethodChannel.MethodCallHandler {
+class MainMethodChannel(private val context: Context) : MethodChannel.MethodCallHandler {
+
+    /**
+     * This method is called when a call is made from Flutter with the help of the Method Channel.
+     */
 
     override fun onMethodCall(methodCall: MethodCall, result: MethodChannel.Result) {
+        Util.print(message = methodCall.arguments.toString(), tag = "Method Call")
+        Util.print(message = methodCall.method, tag = "Method Call")
+
+        val argData = methodCall.arguments.toString()
+
         when (methodCall.method) {
-/*            Constants.KEY_METHOD_PAYMENT_LINK -> {
+            KEY_FLUTTER_TO_NATIVE_OBJECT_PASS -> {
                 if (methodCall.arguments.toString().isNotEmpty()) {
-                    val data = methodCall.arguments.toString()
-                    val info = Gson().fromJson(data, OrderInfo::class.java)
-                    PosModuleIntImp().goToDCFromPos(
-                        context, info.orderAmount
-                            ?: "0", info.order, isNewPos = true
-                    )
+                    val info = Gson().fromJson(argData, UserInfo::class.java)
+                    Util.print(message = info.toString(), tag = KEY_FLUTTER_TO_NATIVE_OBJECT_PASS)
 
-                    FlutterModuleGenerator.getInstance().result = result
+                    //FlutterModuleGenerator.instance().result = result
                 }
-            }*/
-           /* Constants.KEY_METHOD_GET_IMAGE -> {
-                MediaUtils.getMediaData(context)
-                FlutterModuleGenerator.getInstance().result = result
             }
-            */
-           /* Constants.KEY_METHOD_GET_USER_ID -> {
-                try {
-                    result.success((AppPrefRepository(context).partnerId).toString())
-                } catch (e: Exception) {
-                }
-            }*/
-            /*Constants.KEY_METHOD_USR_AGENT -> {
-                result.success(System.getProperty("http.agent") ?: "")
-            }*/
-           /* Constants.KEY_GO_TO_SUBSCRIPTION -> {
-                if (methodCall.arguments.toString().isNotEmpty()) {
-                    goToSubscription(context, methodCall.arguments.toString())
-                    FlutterModuleGenerator.getInstance().result = result
-                }
-            }*/
 
-/*            Constants.KEY_METHOD_FROM_EKYC -> {
-                if (methodCall.arguments.toString().isNotEmpty()) {
-                    val status = methodCall.arguments.toString()
-                    if (status == "success") {
-                        //AppPrefRepository(context).partnerData = null
-                        val nidModuleGenerator = NidModuleGenerator.newInstance()
-                        nidModuleGenerator.clearNidData(context)
-                        CommonUtil.goToNextActivityByClearingHistory(
-                            context,
-                            LoaderActivity::class.java
-                        )
-                    } else CommonUtil.goToNextActivityByClearingHistory(
-                        context,
-                        HomeLandingActivity::class.java
-                    )
-                    result.success(null)
-                }
-            }*/
+            KEY_FLUTTER_TO_NATIVE_SPECIFIC_ROUTE -> {
+                //TODO
+            }
 
-            /*else -> CommonUtil.goToNextActivityByClearingHistory(
-                context,
-                HomeLandingActivity::class.java
-            )*/
+            KEY_FLUTTER_TO_NATIVE_EXIT_FLUTTER -> {
+                Toast.makeText(context, "Flutter Module Exit", Toast.LENGTH_LONG).show()
+            }
+
+            else -> {
+                //TODO
+                /*CommonUtil.goToNextActivityByClearingHistory(
+                    context,
+                    HomeLandingActivity::class.java
+                )*/
+            }
         }
     }
-
-
-    /*private fun setVideoData(url: String, thumb: String): String {
-        val flutterDataModel = VideoData()
-        flutterDataModel.video_url = url
-        flutterDataModel.video_thumb = thumb
-        return Gson().toJson(flutterDataModel)
-    }*/
-}
-
-class StartUpMethodChannel : MethodChannel.MethodCallHandler {
-    override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
-        when (call.method) {
-            /*Constants.KEY_METHOD_SHOW_NATIVE -> {
-                result.success(null)
-            }
-            Constants.KEY_METHOD_GET_VERSION -> {
-                result.success(AppConfig.VERSION_CODE)
-            }
-            Constants.KEY_METHOD_GET_FLAVOR -> {
-                result.success(AppConfig.FLAVOR)
-            }*/
-        }
-    }
-
 }

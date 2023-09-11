@@ -3,6 +3,7 @@ package com.nuhin13.parent_android_native.flutter_communication
 import android.content.Context
 import android.util.Log
 import com.google.gson.Gson
+import com.nuhin13.parent_android_native.Util
 import com.nuhin13.parent_android_native.flutter_communication.ChannelConstants.Companion.KEY_ENGINE_ID
 import com.nuhin13.parent_android_native.flutter_communication.ChannelConstants.Companion.KEY_MAIN_CHANNEL
 import io.flutter.embedding.engine.FlutterEngine
@@ -29,9 +30,9 @@ object FlutterUtil {
             FlutterEngineCache
                 .getInstance()
                 .put(KEY_ENGINE_ID, flutterEngine)
-            callMethodChannel(flutterEngine, StartUpMethodChannel())
+            callMethodChannel(flutterEngine, MainMethodChannel(context))
         } catch (e: Exception) {
-            Log.e("Start Engine Error", e.toString())
+            Util.print(e.toString(), "Start Engine Error")
         }
     }
 
@@ -70,7 +71,7 @@ object FlutterUtil {
                     .build(context)
             )
         } catch (e: Exception) {
-            Log.e("Navigate To Flutter Error", e.toString())
+            Util.print(e.toString(), "Navigate To Flutter Error")
         }
     }
 
@@ -85,7 +86,7 @@ object FlutterUtil {
             val channel = FlutterModuleGenerator.instance!!.methodChannel
             channel!!.invokeMethod(navigationRoute, jsonString)
         } catch (e: Exception) {
-            Log.e("Navigate Flutter With Only Data Error", e.toString())
+            Util.print(e.toString(), "Navigate Flutter With Only Data Error")
         }
 
     }
@@ -110,7 +111,7 @@ object FlutterUtil {
                 channel.invokeMethod(navigationRoute, arguments)
             }
         } catch (e: Exception) {
-            Log.e("Navigate Flutter Screen With Data Error", e.toString())
+            Util.print(e.toString(), "Navigate Flutter Screen With Data Error")
         }
     }
 }

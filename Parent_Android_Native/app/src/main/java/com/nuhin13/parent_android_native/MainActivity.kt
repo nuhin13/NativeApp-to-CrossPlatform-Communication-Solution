@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.nuhin13.parent_android_native.flutter_communication.FlutterUtil
 import com.nuhin13.parent_android_native.flutter_communication.UserInfo
 import com.nuhin13.parent_android_native.ui.theme.Parent_Android_NativeTheme
 
@@ -35,6 +36,9 @@ import com.nuhin13.parent_android_native.ui.theme.Parent_Android_NativeTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        FlutterUtil.startEngine(this)
+
         setContent {
             Parent_Android_NativeTheme {
                 Surface(
