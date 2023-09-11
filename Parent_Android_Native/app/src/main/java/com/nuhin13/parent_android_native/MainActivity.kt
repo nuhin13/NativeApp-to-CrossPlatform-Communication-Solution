@@ -27,12 +27,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.nuhin13.parent_android_native.flutter_communication.FlutterUtil
 import com.nuhin13.parent_android_native.flutter_communication.UserInfo
+import com.nuhin13.parent_android_native.navigation.SetupNavGraph
+import com.nuhin13.parent_android_native.navigation.rememberWindowSize
 import com.nuhin13.parent_android_native.ui.theme.Parent_Android_NativeTheme
+import androidx.navigation.compose.rememberNavController
+import com.nuhin13.parent_android_native.navigation.Screen
 
-
-@OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,167 +44,10 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             Parent_Android_NativeTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Column(
-                        modifier = Modifier.padding(16.dp)
-                            .verticalScroll(rememberScrollState())
-                    ) {
-                        Greeting("Android")
-                        CardViewWithEditTexts(onSubmit = {
-                            Log.e("T", it.toString())
-                        })
-                        CardViewWithImageView()
-                        CardViewWithInputNumber(onSubmit = {
-                            Log.e("T", it.toString())
-                        })
-                    }
-                }
+                val window = rememberWindowSize()
+                val navController = rememberNavController()
+                SetupNavGraph(windowSize = window, navController = navController)
             }
-        }
-    }
-}
-
-@ExperimentalMaterial3Api
-@Composable
-fun CardViewWithEditTexts(
-    onSubmit: (UserInfo) -> Unit
-) {
-    var name by rememberSaveable { mutableStateOf("") }
-    var email by rememberSaveable { mutableStateOf("") }
-    val paddingModifier = Modifier.padding(10.dp).fillMaxWidth()
-
-    Card(
-        modifier = paddingModifier,
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 8.dp
-        ),
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            OutlinedTextField(
-                value = name,
-                onValueChange = {
-                    name = it
-                },
-                label = { Text("Your Name") }
-            )
-            OutlinedTextField(
-                value = email,
-                onValueChange = {
-                    email = it
-                },
-                label = { Text("Your Phone Number") }
-            )
-            Button(
-                onClick = {
-                    val user = UserInfo(name, email)
-                    onSubmit(user)
-                },
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .padding(top = 8.dp)
-            ) {
-                Text(
-                    text = "Navigate to Flutter",
-                )
-            }
-        }
-    }
-}
-
-
-@Composable
-fun CardViewWithImageView() {
-    //val img = imageResource(id = R.drawable.ic_launcher_background)
-    val paddingModifier = Modifier.padding(10.dp).fillMaxWidth()
-
-    Card(
-        modifier = paddingModifier,
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 8.dp
-        ),
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Button(
-                onClick = {},
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .padding(top = 8.dp)
-            ) {
-                Text(text = "Open Camera",)
-            }
-
-            Button(
-                onClick = {},
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .padding(top = 8.dp)
-            ) {
-                Text(text = "Navigate Flutter with Image",)
-            }
-        }
-    }
-}
-
-
-@ExperimentalMaterial3Api
-@Composable
-fun CardViewWithInputNumber(
-    onSubmit: (UserInfo) -> Unit
-) {
-    var value1 by rememberSaveable { mutableStateOf("") }
-    var value2 by rememberSaveable { mutableStateOf("") }
-    val paddingModifier = Modifier.padding(10.dp).fillMaxWidth()
-
-    Card(
-        modifier = paddingModifier,
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 8.dp
-        ),
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(
-                text = "Calculate two numbers",
-            )
-            OutlinedTextField(
-                value = value1,
-                onValueChange = {
-                    value1 = it
-                },
-                label = { Text("Value 1") }
-            )
-            OutlinedTextField(
-                value = value2,
-                onValueChange = {
-                    value2 = it
-                },
-                label = { Text("Value 2") }
-            )
-            Button(
-                onClick = {
-                    val user = UserInfo(value1, value2)
-                    onSubmit(user)
-                },
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .padding(top = 8.dp)
-            ) {
-                Text(
-                    text = "Calculate into Flutter",
-                )
-            }
-
-            Text(
-                text = "This is from Flutter",
-            )
         }
     }
 }
@@ -232,21 +78,3 @@ fun Camera() {
         Text("Take Picture")
     }
 }*/
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Parent_Android_NativeTheme {
-        /*CardViewWithEditTexts(onSubmit = {
-            Log.e("T", it.toString())
-        })*/
-    }
-}
