@@ -16,17 +16,122 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dummy Text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ty-be-gnw">
-                                <rect key="frame" x="102" y="240" width="168" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xNa-xJ-res">
+                                <rect key="frame" x="24" y="91" width="345" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Phone Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KHW-hk-ecj">
+                                <rect key="frame" x="24" y="141" width="345" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pJ2-IA-lPl">
+                                <rect key="frame" x="204.33333333333337" y="199" width="164.66666666666663" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Navigate to Flutter"/>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Value 1" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="23k-Id-NUA">
+                                <rect key="frame" x="24" y="299" width="345" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Value 2" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BJU-MG-jpp">
+                                <rect key="frame" x="24" y="349" width="345" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P2O-aO-8ci">
+                                <rect key="frame" x="84" y="399" width="285" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Calculate two numbers into Flutter"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WN1-sD-cby">
+                                <rect key="frame" x="24" y="499" width="215" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Pick Image From Camera"/>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Yc-0e-2Ux">
+                                <rect key="frame" x="24" y="554" width="345" height="128"/>
+                                <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                <color key="tintColor" systemColor="systemGrayColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="VBW-3d-7qR"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="382-ko-DPo">
+                                <rect key="frame" x="0.0" y="266" width="393" height="1"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="1" id="7Z4-TO-Oag"/>
+                                    <constraint firstAttribute="height" constant="1" id="ORm-zx-CNp"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="5" id="UAB-nG-2qt"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="gyS-R1-WU6"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H78-fx-AXl">
+                                <rect key="frame" x="0.0" y="466" width="393" height="1"/>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="eOo-Hh-l8e"/>
+                                    <constraint firstAttribute="height" constant="1" id="jXf-ey-cVj"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="5" id="zK9-Zo-Qcj"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wUZ-OZ-1CC">
+                                <rect key="frame" x="137" y="706" width="232" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Navigate Flutter with Image"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="BJU-MG-jpp" firstAttribute="top" secondItem="23k-Id-NUA" secondAttribute="bottom" constant="16" id="7JC-Gn-L9V"/>
+                            <constraint firstItem="23k-Id-NUA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="AFS-ho-a1I"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="382-ko-DPo" secondAttribute="trailing" id="EEP-7e-ZaX"/>
+                            <constraint firstItem="382-ko-DPo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="GUu-bI-g82"/>
+                            <constraint firstItem="H78-fx-AXl" firstAttribute="top" secondItem="P2O-aO-8ci" secondAttribute="bottom" constant="32" id="Hay-YR-IUR"/>
+                            <constraint firstItem="H78-fx-AXl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Idr-yN-EGb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pJ2-IA-lPl" secondAttribute="trailing" constant="24" id="Jtq-C9-5Ee"/>
+                            <constraint firstItem="382-ko-DPo" firstAttribute="top" secondItem="pJ2-IA-lPl" secondAttribute="bottom" constant="32" id="LSC-Rl-MAE"/>
+                            <constraint firstItem="KHW-hk-ecj" firstAttribute="top" secondItem="xNa-xJ-res" secondAttribute="bottom" constant="16" id="MSq-Z8-VTR"/>
+                            <constraint firstItem="WN1-sD-cby" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="O9n-tR-9M0"/>
+                            <constraint firstItem="xNa-xJ-res" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="Oki-Ni-gZ9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BJU-MG-jpp" secondAttribute="trailing" constant="24" id="Ozw-Eo-61Q"/>
+                            <constraint firstItem="xNa-xJ-res" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="QHs-r6-EwM"/>
+                            <constraint firstItem="wUZ-OZ-1CC" firstAttribute="top" secondItem="2Yc-0e-2Ux" secondAttribute="bottom" constant="24" id="WRY-HW-V6z"/>
+                            <constraint firstItem="2Yc-0e-2Ux" firstAttribute="top" secondItem="WN1-sD-cby" secondAttribute="bottom" constant="20" id="Y3B-z5-jfY"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="P2O-aO-8ci" secondAttribute="trailing" constant="24" id="ZlS-Wi-y0e"/>
+                            <constraint firstItem="BJU-MG-jpp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="aRI-7a-f00"/>
+                            <constraint firstItem="KHW-hk-ecj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="aYN-EF-Md0"/>
+                            <constraint firstItem="23k-Id-NUA" firstAttribute="top" secondItem="382-ko-DPo" secondAttribute="bottom" constant="32" id="any-tL-BdS"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wUZ-OZ-1CC" secondAttribute="trailing" constant="24" id="b45-B6-Ad2"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="23k-Id-NUA" secondAttribute="trailing" constant="24" id="ceB-ns-H66"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xNa-xJ-res" secondAttribute="trailing" constant="32" id="d6F-su-RUb"/>
+                            <constraint firstItem="2Yc-0e-2Ux" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="dUr-rC-qfN"/>
+                            <constraint firstItem="pJ2-IA-lPl" firstAttribute="top" secondItem="KHW-hk-ecj" secondAttribute="bottom" constant="24" id="eIK-fp-hWY"/>
+                            <constraint firstAttribute="trailing" secondItem="H78-fx-AXl" secondAttribute="trailing" id="g4D-Xo-TDT"/>
+                            <constraint firstItem="WN1-sD-cby" firstAttribute="top" secondItem="H78-fx-AXl" secondAttribute="bottom" constant="32" id="gDs-PF-yge"/>
+                            <constraint firstItem="xNa-xJ-res" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="hMg-mx-nB4"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wUZ-OZ-1CC" secondAttribute="trailing" constant="24" id="jpi-mf-WKm"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KHW-hk-ecj" secondAttribute="trailing" constant="24" id="rFg-MB-pkh"/>
+                            <constraint firstItem="P2O-aO-8ci" firstAttribute="top" secondItem="BJU-MG-jpp" secondAttribute="bottom" constant="16" id="vIB-qU-DmC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2Yc-0e-2Ux" secondAttribute="trailing" constant="24" id="vzg-GH-SRX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xNa-xJ-res" secondAttribute="trailing" constant="24" id="xrF-QO-a3X"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnCalculateIntoFlutter" destination="P2O-aO-8ci" id="IfS-o0-Hp0"/>
+                        <outlet property="btnCameraPick" destination="WN1-sD-cby" id="3eJ-7v-iBf"/>
+                        <outlet property="btnNavigateFlutter" destination="pJ2-IA-lPl" id="2T8-fB-ZOp"/>
+                        <outlet property="btnNavigateFlutterWithImage" destination="wUZ-OZ-1CC" id="w3V-2d-Yua"/>
+                        <outlet property="editTextName" destination="xNa-xJ-res" id="DME-fE-ZId"/>
+                        <outlet property="editTextPhone" destination="KHW-hk-ecj" id="ZlU-4z-IX6"/>
+                        <outlet property="editTextValue1" destination="23k-Id-NUA" id="cjM-uM-ROL"/>
+                        <outlet property="editTextValue2" destination="BJU-MG-jpp" id="dy5-DX-bUv"/>
+                        <outlet property="imgPreview" destination="2Yc-0e-2Ux" id="iee-6O-1n0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -36,6 +141,12 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
