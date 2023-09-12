@@ -30,6 +30,9 @@
                                 <rect key="frame" x="204.33333333333337" y="199" width="164.66666666666663" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Navigate to Flutter"/>
+                                <connections>
+                                    <action selector="navigateToFlutterClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="B3k-A8-m0l"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Value 1" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="23k-Id-NUA">
                                 <rect key="frame" x="24" y="299" width="345" height="34"/>
@@ -45,11 +48,17 @@
                                 <rect key="frame" x="84" y="399" width="285" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Calculate two numbers into Flutter"/>
+                                <connections>
+                                    <action selector="navigateToFlutterCalculation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="56H-yO-zJl"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WN1-sD-cby">
                                 <rect key="frame" x="24" y="499" width="215" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Pick Image From Camera"/>
+                                <connections>
+                                    <action selector="cameraOpenClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="d48-Ea-mxr"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Yc-0e-2Ux">
                                 <rect key="frame" x="24" y="554" width="345" height="128"/>
@@ -82,6 +91,9 @@
                                 <rect key="frame" x="137" y="706" width="232" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Navigate Flutter with Image"/>
+                                <connections>
+                                    <action selector="navigateToFlutterWithImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oRJ-Dc-PEQ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
