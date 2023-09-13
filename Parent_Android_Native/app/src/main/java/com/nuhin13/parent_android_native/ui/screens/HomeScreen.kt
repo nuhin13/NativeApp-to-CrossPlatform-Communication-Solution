@@ -25,6 +25,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.nuhin13.parent_android_native.flutter_communication.ChannelConstants
+import com.nuhin13.parent_android_native.flutter_communication.FlutterUtil
 import com.nuhin13.parent_android_native.flutter_communication.UserInfo
 import com.nuhin13.parent_android_native.navigation.Screen
 import com.nuhin13.parent_android_native.ui.theme.Parent_Android_NativeTheme
@@ -46,7 +48,8 @@ fun HomeScreen(
             Greeting("Android")
             CardViewWithEditTexts(onSubmit = {
                 Log.e("T", it.toString())
-            })
+            },
+            navController = navController)
             CardViewWithImageView()
             CardViewWithInputNumber(onSubmit = {
                 Log.e("T", it.toString())
@@ -58,7 +61,8 @@ fun HomeScreen(
 @ExperimentalMaterial3Api
 @Composable
 fun CardViewWithEditTexts(
-    onSubmit: (UserInfo) -> Unit
+    onSubmit: (UserInfo) -> Unit,
+    navController: NavController
 ) {
     var name by rememberSaveable { mutableStateOf("") }
     var email by rememberSaveable { mutableStateOf("") }
@@ -80,7 +84,7 @@ fun CardViewWithEditTexts(
                 onValueChange = {
                     name = it
                 },
-                label = { Text("Your Name") }
+                label = { Text("c") }
             )
             OutlinedTextField(
                 value = email,
@@ -93,6 +97,7 @@ fun CardViewWithEditTexts(
                 onClick = {
                     val user = UserInfo(name, email)
                     onSubmit(user)
+                    FlutterUtil.navigateToFlutter(navController.context, ChannelConstants.KEY_NATIVE_TO_FLUTTER_OPEN)
                 },
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
