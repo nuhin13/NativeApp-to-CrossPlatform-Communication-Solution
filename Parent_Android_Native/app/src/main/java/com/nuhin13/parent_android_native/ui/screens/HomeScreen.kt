@@ -1,6 +1,8 @@
 package com.nuhin13.parent_android_native.ui.screens
 
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,6 +18,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionContext
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -25,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.google.gson.Gson
 import com.nuhin13.parent_android_native.flutter_communication.ChannelConstants
 import com.nuhin13.parent_android_native.flutter_communication.FlutterUtil
 import com.nuhin13.parent_android_native.flutter_communication.UserInfo
@@ -45,25 +49,16 @@ fun HomeScreen(
                 .padding(16.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            Greeting("Android")
-            CardViewWithEditTexts(onSubmit = {
-                Log.e("T", it.toString())
-            },
-            navController = navController)
-            CardViewWithImageView()
-            CardViewWithInputNumber(onSubmit = {
-                Log.e("T", it.toString())
-            }, navController = navController)
+            CardViewWithEditTexts(navController = navController)
+            CardViewWithImageView(navController = navController)
+            CardViewWithInputNumber(navController = navController)
         }
     }
 }
 
 @ExperimentalMaterial3Api
 @Composable
-fun CardViewWithEditTexts(
-    onSubmit: (UserInfo) -> Unit,
-    navController: NavController
-) {
+fun CardViewWithEditTexts(navController: NavController) {
     var name by rememberSaveable { mutableStateOf("") }
     var email by rememberSaveable { mutableStateOf("") }
     val paddingModifier = Modifier
@@ -73,7 +68,7 @@ fun CardViewWithEditTexts(
     Card(
         modifier = paddingModifier,
         elevation = CardDefaults.cardElevation(
-            defaultElevation = 8.dp
+            defaultElevation = 4.dp
         ),
     ) {
         Column(
@@ -84,7 +79,7 @@ fun CardViewWithEditTexts(
                 onValueChange = {
                     name = it
                 },
-                label = { Text("c") }
+                label = { Text("Your Name") }
             )
             OutlinedTextField(
                 value = email,
@@ -95,9 +90,19 @@ fun CardViewWithEditTexts(
             )
             Button(
                 onClick = {
-                    val user = UserInfo(name, email)
-                    onSubmit(user)
-                    FlutterUtil.navigateToFlutter(navController.context, ChannelConstants.KEY_NATIVE_TO_FLUTTER_OPEN)
+                    if (!valueValidation(name, email, navController.context)) {
+                        val user = UserInfo(name, email)
+
+                        val arguments: MutableMap<String, String?> = HashMap()
+                        arguments["name"] = name
+                        arguments["email"] = email
+
+                        FlutterUtil.navigateFlutterScreenWithData(
+                            navController.context,
+                            arguments = arguments,
+                            ChannelConstants.KEY_NATIVE_TO_FLUTTER_SPECIFIC_ROUTE_WITH_DATA
+                        )
+                    }
                 },
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
@@ -111,10 +116,16 @@ fun CardViewWithEditTexts(
     }
 }
 
+private fun valueValidation(input1: String?, input2: String?, context: Context): Boolean {
+    if (!input1.isNullOrEmpty() || !input2.isNullOrEmpty()) {
+        Toast.makeText(context, "Input is not null or empty", Toast.LENGTH_SHORT).show()
+        return false
+    }
+    return true
+}
 
 @Composable
-fun CardViewWithImageView() {
-    //val img = imageResource(id = R.drawable.ic_launcher_background)
+fun CardViewWithImageView(navController: NavController) {
     val paddingModifier = Modifier
         .padding(10.dp)
         .fillMaxWidth()
@@ -138,7 +149,12 @@ fun CardViewWithImageView() {
             }
 
             Button(
-                onClick = {},
+                onClick = {
+                    FlutterUtil.navigateToFlutter(
+                        context = navController.context,
+                        ChannelConstants.KEY_NATIVE_TO_FLUTTER_SPECIFIC_ROUTE
+                    )
+                },
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .padding(top = 8.dp)
@@ -152,10 +168,7 @@ fun CardViewWithImageView() {
 
 @ExperimentalMaterial3Api
 @Composable
-fun CardViewWithInputNumber(
-    onSubmit: (UserInfo) -> Unit,
-    navController: NavController
-) {
+fun CardViewWithInputNumber(navController: NavController){
     var value1 by rememberSaveable { mutableStateOf("") }
     var value2 by rememberSaveable { mutableStateOf("") }
     val paddingModifier = Modifier
@@ -165,7 +178,7 @@ fun CardViewWithInputNumber(
     Card(
         modifier = paddingModifier,
         elevation = CardDefaults.cardElevation(
-            defaultElevation = 8.dp
+            defaultElevation = 4.dp
         ),
     ) {
         Column(
@@ -190,9 +203,23 @@ fun CardViewWithInputNumber(
             )
             Button(
                 onClick = {
-                    val user = UserInfo(value1, value2)
-                    onSubmit(user)
-                    navController.navigate(Screen.AfterFlutter.route)
+                    if (!valueValidation(value1, value2, navController.context)) {
+                        val value = UserInfo(value1, value2)
+
+                        val arguments: MutableMap<String, String?> = HashMap()
+                        arguments["value1"] = value1
+                        arguments["value2"] = value2
+
+                        val valueJson = Gson().toJson(value)
+
+                        FlutterUtil.navigateFlutterWithOnlyData(
+                            item = arguments,
+                            ChannelConstants.KEY_NATIVE_TO_FLUTTER_OBJECT_PASS,
+                            navController.context
+                        )
+                    }
+
+                    //navController.navigate(Screen.AfterFlutter.route)
                 },
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)

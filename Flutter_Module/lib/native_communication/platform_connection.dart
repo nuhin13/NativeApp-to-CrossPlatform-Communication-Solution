@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -57,8 +58,16 @@ class PlatformConnection {
     printLog("=== Go To Specific Screen With Data Starts");
 
     if (methodCall.arguments != null) {
-      var userInfo = UserInfo.fromJson(methodCall.arguments);
+      printLog(methodCall.arguments.toString());
 
+      //var jsonList = jsonDecode(methodCall.arguments);
+      //printLog(jsonList);
+
+      var userInfo = UserInfo(
+          name: methodCall.arguments['name'],
+          email: methodCall.arguments['email']);
+
+      print(userInfo.toJson());
       Navigator.push(
           context,
           MaterialPageRoute(

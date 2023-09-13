@@ -13,6 +13,9 @@ import io.flutter.plugin.common.MethodChannel
 
 object FlutterUtil {
 
+
+    var methodChannel: MethodChannel? = null
+
     /**
      * Start the Flutter engine. This is a singleton method.
      * Call this method from the Application class or at the entry point of your application.
@@ -27,10 +30,8 @@ object FlutterUtil {
 
             flutterEngine.dartExecutor.executeDartEntrypoint(DartExecutor.DartEntrypoint.createDefault())
 
-            FlutterEngineCache
-                .getInstance()
-                .put(KEY_ENGINE_ID, flutterEngine)
-            callMethodChannel(flutterEngine, MainMethodChannel(context))
+            FlutterEngineCache.getInstance().put(KEY_ENGINE_ID, flutterEngine)
+            methodChannel = callMethodChannel(flutterEngine, MainMethodChannel(context))
         } catch (e: Exception) {
             Util.print(e.toString(), "Start Engine Error")
         }
@@ -61,9 +62,10 @@ object FlutterUtil {
      * Navigate to the Flutter module
      */
 
-    fun navigateToFlutter(context: Context, toFlutter: String) {
+    fun navigateToFlutter(context: Context, toFlutter: String, arguments:Any? = null) {
         try {
             FlutterModuleGenerator.instance!!.flutterFeature = toFlutter
+            FlutterModuleGenerator.instance!!.channelArgument = arguments
             context.startActivity(
                 FlutterContainerActivity
                     .withCachedEngine(KEY_ENGINE_ID)
@@ -80,11 +82,10 @@ object FlutterUtil {
      * Generic method to navigate to the Flutter module with data
      */
 
-    fun <T> navigateFlutterWithOnlyData(item: T, navigationRoute: String) {
+    fun <T> navigateFlutterWithOnlyData(item: T, navigationRoute: String, context: Context) {
         try {
-            val jsonString = Gson().toJson(item)
-            val channel = FlutterModuleGenerator.instance!!.methodChannel
-            channel!!.invokeMethod(navigationRoute, jsonString)
+            //val jsonString = Gson().toJson(item)
+            methodChannel!!.invokeMethod(navigationRoute, item)
         } catch (e: Exception) {
             Util.print(e.toString(), "Navigate Flutter With Only Data Error")
         }
@@ -95,20 +96,23 @@ object FlutterUtil {
      * Navigate with Specific Screen with data
      */
 
-    fun navigateFlutterScreenWithData(
-        context: Context, arguments: MutableMap<String, String?>,
+    fun <T> navigateFlutterScreenWithData(
+        context: Context,
+        arguments: T?,
         navigationRoute: String
     ) {
         try {
-            val engine = FlutterEngineCache.getInstance().get(KEY_ENGINE_ID)
-            val channel = callMethodChannel(engine, MainMethodChannel(context))
+            if (methodChannel != null) {
+                FlutterModuleGenerator.instance?.methodChannel = methodChannel
 
-            if (channel != null) {
-                FlutterModuleGenerator.instance?.methodChannel = channel
 
+
+                //val jsonString = Gson().toJson(arguments)
                 print("from parent$arguments")
 
-                channel.invokeMethod(navigationRoute, arguments)
+                navigateToFlutter(context, navigationRoute, arguments)
+
+                //methodChannel!!.invokeMethod(navigationRoute, arguments)
             }
         } catch (e: Exception) {
             Util.print(e.toString(), "Navigate Flutter Screen With Data Error")

@@ -5,11 +5,10 @@ class UserInfo {
 
   UserInfo({this.name, this.email, this.phone});
 
-  factory UserInfo.fromJson(Map<String, dynamic> json) {
+  factory UserInfo.fromJson(dynamic json) {
     return UserInfo(
-      name: json['name'],
-      email: json['email'],
-      phone: json['phone'],
+      name: json["name"].toString(),
+      email: json["email"].toString(),
     );
   }
 

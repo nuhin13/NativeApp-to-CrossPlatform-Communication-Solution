@@ -5,10 +5,12 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.lifecycle.lifecycleScope
 import com.nuhin13.parent_android_native.Util
 import com.nuhin13.parent_android_native.flutter_communication.ChannelConstants.Companion.IMAGE_CONSTANT_CODE
 import io.flutter.embedding.android.FlutterFragmentActivity
+import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.embedding.engine.FlutterEngineCache
 import kotlinx.coroutines.delay
 
@@ -21,7 +23,11 @@ class FlutterContainerActivity : FlutterFragmentActivity() {
         val channel = FlutterUtil.callMethodChannel(engine, MainMethodChannel(this))
         if (channel != null) {
             FlutterModuleGenerator.instance?.methodChannel = channel
-            FlutterModuleGenerator.instance?.flutterFeature?.let { channel.invokeMethod(it, null) }
+            val arg = FlutterModuleGenerator.instance?.channelArgument
+
+            FlutterModuleGenerator.instance?.flutterFeature?.let {
+                channel.invokeMethod(it, arg)
+            }
         } else {
             lifecycleScope.launchWhenResumed {
                 delay(200)

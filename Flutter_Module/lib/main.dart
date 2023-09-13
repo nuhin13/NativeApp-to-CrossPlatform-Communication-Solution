@@ -5,8 +5,25 @@ import 'package:flutter_module/screens/phone_input_screen.dart';
 
 void main() => runApp(const MyApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late PlatformConnection _platformChannel;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _platformChannel = PlatformConnection();
+      _platformChannel.setMethodCallHandler(context);
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +57,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print("Build Called");
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),

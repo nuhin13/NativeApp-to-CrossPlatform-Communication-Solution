@@ -6,6 +6,7 @@ class FlutterModuleGenerator {
     var flutterFeature: String? = null
     var methodChannel: MethodChannel? = null
     var result: MethodChannel.Result? = null
+    var channelArgument: Any? = null
     var isResumed = false
 
     fun clearModuleGenerator() {
